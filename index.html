@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Code sharing: Infite Runner</title>
+  <title>Bitsbox Code: Calculator</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/js.min.js"></script>
@@ -40,90 +40,12 @@
   </style>
 </head>
 <body>
-  <h1>Bitsbox Code: Infinite Runner</h1>
-  <pre><code class="language-js">function makeRow(y) {
-  let row = []
-  row.push(stamp("block20",100,y,200).rotate(90))
-  row.push(stamp("block21",300,y,200).rotate(-90))
-  row.push(stamp("block20",700,y,200).rotate(-90))
-  row.push(stamp("block21",500,y,200).rotate(90))
-  return row
-}
-
-let level = 1
-let speed = 15
-
-function moveBlock(block) {
-  block.move(block.x,block.y+speed)
-  block.wrap()
-}
-
-
-
-function moveEnemy(enemy) {
-  enemy.move(enemy.x,enemy.y+speed)
-  if (offscreen(enemy)) {
-    level = (level + 1)*1.1
-    if (speed < 75) {
-      speed += 2.5
-    }
-    speedtxt.change(`Score: ${Math.round(level)}`)
-    let x = random(768)
-    enemy.move(x,0)
-  }
-}
-
-
-function moveRow(row) {
-  row.forEach(moveBlock)
-}
-
-
-let player = stamp('flamingo2',384,900,200)
-
-let rows = []
-
-rows.push(makeRow(100))
-rows.push(makeRow(300))
-rows.push(makeRow(500))
-rows.push(makeRow(700))
-rows.push(makeRow(900))
-rows.push(makeRow(1100))
-let enemyHitbox = circle(384,0,70,'clear')
-let enemy = stamp("monster30",384,0,200)
-let playerHitbox = circle(384,900,50,'clear')
-
-player.front()
-
-function lose() {
-  if (enemyHitbox.hits(playerHitbox)) {
-    speed = 0
-    stamp("youlose")
-  }
-}
-
-
-function loop() {
-  rows.forEach(moveRow)
-  moveEnemy(enemy)
-  enemyHitbox.move(enemy.x,enemy.y)
-  lose()
-}
-
-box(0,0,800,100,'black')
-box(0,900,800,150,'black')
-speedtxt = text(`Score: 1`,50,75,50,"white")
-
-function drag() {
-  player.move(x,player.y)
-  playerHitbox.move(x,player.y)
-}
-
-  </code></pre>
-  <script>
-    hljs.highlightAll();
-    hljs.initLineNumbersOnLoad();
-  </script>
-
+  <h1 style="text-align: center; color: gold;">Chinmay's Bitsbox Code!</h1><br>
+  <h1 style="text-align: center;">
+    <a href="infinite.html" style="color: darkgoldenrod;">Bitsbox Code: InfiniteRunner</a>
+  </h1>
+  <h1 style="text-align: center;">
+    <a href="calculator.html" style="color: darkgoldenrod;">Bitsbox Code: Calculator</a>
+  </h1>
 </body>
 </html>
