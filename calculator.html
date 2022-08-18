@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bitsbox Code: Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/monokai.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/js.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
+  <style type="text/css">
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      text-align: center;
+      color: #ccc;
+      border-right: 1px solid #CCC;
+      vertical-align: top;
+      padding-right: 10px !important;
+
+      /* your custom style here */
+    }
+
+    /* for block of code */
+    .hljs-ln-code {
+      padding-left: 10px !important;
+    }
+    body {
+      background: #272822;
+      color: #ddd;
+    }
+    code {
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bitsbox Code: Calculator</h1>
+  <h3>Icon Code:</h3>
+  <pre><code class="language-js">fill('green')
+text("+",25,70,75,'white')
+text("-",90,65,75,'white')
+text("×",25,125,75,'white')
+text("÷",80,125,75,'white')
+  </code></pre>
+  <h3>Program Code:</h3>
+  <pre><code class="language-js">fill("slategray")
+
+let grid = {
+  x:[135,300,465,630],
+  y:[925,760,595,430,265]
+}
+
+let buttonData = [
+  { x:1, y:1, value:"-" },
+  { x:3, y:1, value:"." },
+  { x:2, y:1, value:0 },
+  { x:1, y:2, value:1 },
+  { x:2, y:2, value:2 },
+  { x:3, y:2, value:3 },
+  { x:1, y:3, value:4 },
+  { x:2, y:3, value:5 },
+  { x:3, y:3, value:6 },
+  { x:1, y:4, value:7 },
+  { x:2, y:4, value:8 },
+  { x:3, y:4, value:9 },
+  
+  { x:4, y:1, value:"=", colour:"green" },
+  { x:4, y:2, value:"+", colour:"darkblue"},
+  { x:4, y:3, value:"-", colour:"darkblue"},
+  { x:4, y:4, value:"*", colour:"darkblue"},
+  { x:4, y:5, value:"/", colour:"darkblue"},
+  { x:3, y:5, value:")", colour:"darkblue"},
+  { x:2, y:5, value:"(", colour:"darkblue"},
+  { x:1, y:5, value:"<-", colour:"darkred"},
+]
+
+let x, y, val, colour, button
+let expression = ""
+
+function change(text) {
+  if (!text) {text = ""}
+  display.change(text.slice(0,12))
+}
+
+
+function calculate() {
+  let ans = eval(expression).toString()
+  expression = ""
+  change(ans)
+}
+
+
+function backspace() {
+  expression = expression.slice(0, -1)
+  change(expression)
+}
+
+buttonData.foreach((item,index) => {
+  x = grid.x[item.x-1]
+  y = grid.y[item.y-1]
+  val = item.value
+  colour = item.colour
+  
+  if (!colour) {
+    colour = "black"
+  }
+
+  button = circle(x,y,75,colour)
+  text(val,x-20,y+20,'white',75)
+
+  if (val == "=") {
+    button.tap = calculate
+  } else if (val == "<-") {
+    button.tap = backspace
+  } else {
+    button.tap = () => {
+      expression += item.value
+      change(expression)
+    }
+  }
+})
+
+box(90,35,575,125,'white')
+let display = text("",100,125,80,'black','fira mona')
+  </code></pre>
+  <script>
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+  </script>
+
+</body>
+</html>
